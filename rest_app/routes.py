@@ -5,7 +5,7 @@ from common.decorators import inject_query_params
 rest_app = Blueprint('rest_app', __name__)
 
 
-@rest_app.get('/rate')
+@rest_app.post('/rate')
 @inject_query_params(default_values={
     'payload': {'default_value': '', 'type': str}
 })
