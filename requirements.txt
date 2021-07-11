@@ -1,0 +1,11 @@
+click
+Flask
+itsdangerous
+MarkupSafe
+pkg-resources
+Werkzeug
+setuptools
+pymongo
+flask-cors
+
+-e .
