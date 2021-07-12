@@ -3,5 +3,6 @@ Flask
 setuptools
 pymongo
 flask-cors
+requests
 
 -e .
