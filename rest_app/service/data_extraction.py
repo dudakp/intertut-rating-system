@@ -11,11 +11,11 @@ logger = get_logger(__name__)
 
 def extract_component_test_results(data: dict) -> Optional[TestSuite]:
     try:
-        test_suite_data = data['data']['data']['testsuite']['$']
+        test_suite_data = data['data']['testsuite']['$']
         test_suite_schema = TestSuiteSchema()
         test_suite: TestSuite = test_suite_schema.load(test_suite_data)
 
-        test_cases_data = [d['$'] for d in data['data']['data']['testsuite']['_']['testcase']]
+        test_cases_data = [d['$'] for d in data['data']['testsuite']['_']['testcase']]
         test_cases_schema = TestCaseSchema(many=True)
         test_cases: List[TestCase] = test_cases_schema.load(test_cases_data)
 
@@ -29,7 +29,7 @@ def extract_component_test_results(data: dict) -> Optional[TestSuite]:
 
 def extract_github_info(data: dict) -> Optional[GithubData]:
     try:
-        head_commit = data['data']['head_commit']
+        head_commit = data['head_commit']
         github_data: GithubData = GithubDataSchema().load(head_commit, unknown=EXCLUDE)
         github_data.commit_github_author_username = head_commit['author']['username']
         return github_data
