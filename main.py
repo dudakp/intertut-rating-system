@@ -1,6 +1,4 @@
-from flask import Flask
-
-from common.utils.configuration_utils import create_app
+from common.configuration.app_config import create_app
 
 app = create_app(__name__)
 

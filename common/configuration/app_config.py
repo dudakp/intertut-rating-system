@@ -4,7 +4,8 @@ import flask
 from flask import Flask, Blueprint
 from flask_cors import CORS
 
-from common.utils.logging_utils import get_logger
+from common.configuration.datasource import connect_to_datasource
+from common.configuration.logging import get_logger
 from rest_app.routes import rest_app
 
 logger = get_logger(__name__)
@@ -12,6 +13,7 @@ logger = get_logger(__name__)
 
 def create_app(name: str) -> flask.app:
     app = Flask(name)
+    connect_to_datasource()
     CORS(app)
     register_blueprints(app)
     logger.info('web_app inicialization complete')

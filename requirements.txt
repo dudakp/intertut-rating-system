@@ -1,8 +1,10 @@
 gunicorn
 Flask
 setuptools
-pymongo
+mongoengine
+dnspython
 flask-cors
 requests
+marshmallow
 
 -e .

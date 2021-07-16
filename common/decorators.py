@@ -1,8 +1,10 @@
 import functools
 import inspect
+import typing
 from typing import Dict
 
 from flask import request
+from marshmallow import Schema
 
 
 def serialize(result_schema, collection: bool = False):
@@ -17,11 +19,22 @@ def serialize(result_schema, collection: bool = False):
     return decorator_serialize
 
 
-def inject_request_body():
+def inject_request_body(body_schema: typing.Type[Schema]):
+    """
+    usege:
+        @inject_request_body(TestSchema)
+    :param body_schema:
+    :return:
+    """
+
     def decorator_inject(func):
         @functools.wraps(func)
         def wrapper_inject(*args, **kwargs):
-            return request.data
+            model = request.json
+
+            schema = body_schema()
+            result = schema.load(model)
+            return func(result)
 
         return wrapper_inject
 
