@@ -16,6 +16,7 @@ def create_module_rating() -> Response:
     logger.info('Started rating processing for user: ')
     data = request.data
     dict_data = json.loads(data)
+    logger.info(dict_data)
     test_results = extract_component_test_results(dict_data)
     github_info = extract_github_info(dict_data)
     rating = rate_tests(test_results, github_info)
