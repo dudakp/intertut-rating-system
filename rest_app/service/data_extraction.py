@@ -22,7 +22,8 @@ def extract_component_test_results(data: dict) -> Optional[TestSuite]:
         test_suite.test_cases = test_cases
 
         return test_suite
-    except KeyError:
+    except KeyError as e:
+        logger.error(e)
         return None
 
 
