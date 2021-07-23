@@ -1,7 +1,7 @@
 import logging
 import sys
 
-STREAM_LOGGER_FORMAT = '[%(levelname)s] - %(asctime)s - %(name)s - : %(message)s in %(pathname)s:%(lineno)d'
+STREAM_LOGGER_FORMAT = '[%(levelname)s] - %(asctime)s - %(name)s:%(lineno)d - %(message)s'
 
 
 def get_logger(name: str, level=logging.INFO) -> logging.Logger:

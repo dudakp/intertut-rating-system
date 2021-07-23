@@ -12,9 +12,9 @@ class GithubData:
 
 
 class GithubDataSchema(Schema):
-    commit_url = fields.Str(data_key='url')  # data.head_commit.url
-    commit_message = fields.Str(data_key='message')  # data.head_commit.message
-    commit_timestamp = fields.Str(data_key='timestamp')  # data.head_commit.timestamp
+    commit_url = fields.Str(data_key='url')
+    commit_message = fields.Str(data_key='message')
+    commit_timestamp = fields.Str(data_key='timestamp')
 
     @post_load
     def create_object(self, data, **kwargs):
