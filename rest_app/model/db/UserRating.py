@@ -1,4 +1,4 @@
-from mongoengine import Document, StringField, ObjectIdField, IntField, FloatField, DateTimeField
+from mongoengine import Document, StringField, IntField, FloatField, DateTimeField
 
 
 class UserRating(Document):

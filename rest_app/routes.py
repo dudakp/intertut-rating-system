@@ -14,6 +14,7 @@ logger = get_logger(__name__)
 @rest_app.post('/rate')
 def create_module_rating() -> Response:
     logger.info('Started rating processing for user: ')
+    logger.info(request.data)
     data = request.data
     dict_data = json.loads(data)
 

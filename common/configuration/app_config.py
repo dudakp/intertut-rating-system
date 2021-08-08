@@ -12,11 +12,16 @@ logger = get_logger(__name__)
 
 
 def create_app(name: str) -> flask.app:
+    """
+    Configurations that dont produce any objects should be configured here
+    :param name: app name
+    :return: flask app instance
+    """
     app = Flask(name)
     connect_to_datasource()
     CORS(app)
     register_blueprints(app)
-    logger.info('web_app inicialization complete')
+    logger.info('web_app initialization complete')
     return app
 
 

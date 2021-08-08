@@ -2,12 +2,14 @@ from datetime import datetime
 
 from marshmallow import EXCLUDE
 
+from common.decorators import publish_message_after
 from rest_app.model.db.UserRating import UserRating
 from rest_app.model.dto.github_info import GithubData
 from rest_app.model.dto.test_suite import TestSuite
 from rest_app.model.rest.UserRatingDto import UserRatingDtoSchema, UserRatingDto
 
 
+@publish_message_after(payload=f'test rating complete!', exchange='x_res', routing_key='tr')
 def rate_tests(testsuite: TestSuite, github_data: GithubData) -> UserRatingDto:
     saved_json = UserRating(user_id='user-123-',
                             tests_passed=testsuite.tests - testsuite.failures,

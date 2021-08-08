@@ -6,6 +6,24 @@ from typing import Dict
 from flask import request
 from marshmallow import Schema
 
+from common.configuration.config_source.ConfigContext import ConfigContext
+
+context = ConfigContext()
+
+
+def publish_message_after(payload: any, exchange: str, routing_key: str):
+    def decorator_publish_message_after(func):
+        @functools.wraps(func)
+        def wrapper_publish_message_after(*args, **kwargs):
+            channel = context.amqp_connection.channel()
+            func(*args, **kwargs)
+            channel.basic_publish(exchange=exchange, routing_key=routing_key, body=payload)
+            return
+
+        return wrapper_publish_message_after
+
+    return decorator_publish_message_after
+
 
 def serialize(result_schema, collection: bool = False):
     def decorator_serialize(func):
@@ -57,7 +75,7 @@ def inject_query_params(default_values: Dict):
         @functools.wraps(func)
         def wrapper_inject(*args, **kwargs):
             injected_params = dict(kwargs)
-
+            # this shit wack
             for parameter_name in param_names:
                 if parameter_name in request.args:
                     injected_params[parameter_name] = \

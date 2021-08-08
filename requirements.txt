@@ -6,5 +6,8 @@ dnspython
 flask-cors
 requests
 marshmallow
+pika
+pika-stubs
+python-dotenv
 
 -e .
